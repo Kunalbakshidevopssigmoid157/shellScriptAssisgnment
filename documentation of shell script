@@ -1,0 +1,349 @@
+# To respresent the  types of shell 
+
+#!/bin/bash
+
+# Variable Declaration 
+
+# If user have give wrong input then
+Attempt=0 # To store the no of attempt user is use/try to give correct input and this application user have only two times to use the input. 
+
+Component_Name="null" # To store the  value of Component Name which user give input for running this application.
+
+Scale="null" # To store the  value of Scale which user give input for running this application.
+
+View="null" # To store the  value of View  which user give input for running this application.
+
+Count=10 # To store the  value of Count which user give input for running this application. And in this application, we use default value of count as  any negative number or greater than 9 any positive number.
+
+Complete="false" # To store the  value of Complete which check the whether user give all variable input of this application. And then check all input is valid or not. 
+
+# check_input function to check the user give input is valid or not with respect of all variable which is use to access the user input
+
+function check_input(){
+
+# First we clear the screen
+
+clear
+
+# This if condition tell us that previous attempted is valid or not
+
+if [ "$Complete" == "true" ]
+then 
+exit 1
+fi
+
+# We ask the user to give the input corrosponding the Component Name and store the value in Component Name
+
+read -p  "Enter the Component Name [Ingestor/Joiner/Wrangler/Validator]: " Component_Name
+
+# To check the Component Name is empty/null or not
+
+if [ "$Component_Name" != "null" ]
+then
+
+# We use the case/switch case condition because we not consider any case sensitive condition. Any type of upper/lower case input which is present in cases is valid. 
+
+case "$Component_Name" in
+
+# Here we use wildcard for all valid Component Name which is given in the problem statement. And wildcart -> matches exactly one character.
+
+[iI][nN][gG][eE][sS][tT][oO][rR])
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+val=`cut -d ";" -f 3 sig.conf`
+
+# The below command is used to substitute the value with component name in file sig.conf
+
+sed -i 's/'"$val"'/'" $Component_Name "'/g' sig.conf
+
+;;
+[jJ][oO][iI][nN][eE][rR])
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ val=`cut -d ";" -f 3 sig.conf`
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ sed -i 's/'"$val"'/'" $Component_Name "'/g' sig.conf
+;;
+[wW][rR][aA][nN][gG][lL][eE][rR])
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ val=`cut -d ";" -f 3 sig.conf`
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ sed -i 's/'"$val"'/'" $Component_Name "'/g' sig.conf
+
+;;
+[vV][aA][lL][iI][dD][aA][tT][oO][rR])
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ val=`cut -d ";" -f 3 sig.conf`
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ sed -i 's/'"$val"'/'" $Component_Name "'/g' sig.conf
+;;
+*)
+
+# In this if-else case we check that previous attempt is valid and also check the number of attempt user have try.If user has max attempted for this application then it must be stop with a message. 
+
+if [[ "$Complete" == "false" && "$Attempt" -lt 2 ]]
+then
+
+# Count number of attemp for particular user
+
+((Attempt++))
+
+# clear command clear the screen
+
+clear
+
+echo "Invalid Component Name"
+
+# calling again check_input
+
+check_input
+else
+
+# Message for number of attempt for user has try.
+
+echo "You have twice attempted , Please try again"
+exit 1
+fi
+;;
+esac
+fi
+
+# We ask the user to give the input corrosponding the Scale and store the value in Scale
+
+
+echo " "
+read -p "Enter the Scale [High/Mid/Low]: " Scale
+
+# To check the Scale is empty/null or not
+
+if [ "$Scale" != "null" ]
+then
+
+# We use the case/switch case condition because we not consider any case sensitive condition. Any type of upper/lower case input which is present in cases is valid. 
+
+case "$Scale" in 
+
+# Here we use wildcard for all valid View which is given in the problem statement.And wildcart -> matches exactly one character.
+
+[hH][iI][gG][hH])
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ val=`cut -d ";" -f 2 sig.conf`
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ sed -i 's/'"$val"'/'" $Scale "'/g' sig.conf
+;;
+[mM][iI][dD])
+ 
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ val=`cut -d ";" -f 2 sig.conf`
+ 
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ sed -i 's/'"$val"'/'" $Scale "'/g' sig.conf
+
+;;
+[lL][oO][wW])
+  
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ val=`cut -d ";" -f 2 sig.conf`
+ 
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ sed -i 's/'"$val"'/'" $Scale "'/g' sig.conf
+;;
+*)
+
+# In this if-else case we check that previous attempt is valid and also check the number of attempt user have try.If user has max attempted for this application then it must be stop with a message. 
+
+if [[ "$Complete" == "false" && "$Attempt" -lt 2 ]]
+then
+# Count number of attemp for particular user
+
+((Attempt++))
+
+# clear command clear the screen
+
+clear
+
+echo "Invalid Scale"
+
+# calling again check_input
+
+check_input
+else
+
+# Message for number of attempt for user has try.
+
+echo "You have twice attempted , Please try again"
+exit 1
+fi
+;;
+esac
+fi
+
+# We ask the user to give the input corrosponding the View and store the value in View
+
+echo " "
+read -p "Enter the View [Auction/Bid]: " View
+
+# To check the View is empty/null or not
+
+if [ "$View"!="null" ]
+then
+
+# We use the case/switch case condition because we not consider any case sensitive condition. Any type of upper/lower case input which is present in cases is valid. 
+
+case "$View" in
+
+# Here we use wildcard for all valid View which is given in the problem statement.And wildcart -> matches exactly one character.
+
+[aA][uU][cC][tT][iI][oO][nN])
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+   val=`cut -d ";" -f 1 sig.conf`
+ 
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ sed -i 's/'"$val"'/'" vdopiasample-$View "'/g' sig.conf
+;;
+[bB][iI][dD])
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ val=`cut -d ";" -f 1 sig.conf`
+ 
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ sed -i 's/'"$val"'/'" vdopiasample-$View "'/g' sig.conf
+;;
+*)
+
+# In this if-else case we check that previous attempt is valid and also check the number of attempt user have try.If user has max attempted for this application then it must be stop with a message. 
+
+if [[ "$Complete"=="false" && "$Attempt" -lt 2 ]]
+then
+# Count number of attemp for particular user
+
+((Attempt++))
+
+# clear command clear the screen
+
+clear
+
+echo "Invalid View"
+
+# calling again check_input
+
+check_input
+else
+
+# Message for number of attempt for user has try.
+
+echo "You have twice attempted , Please try again"
+exit 1
+fi
+;;
+esac
+fi
+
+# We ask the user to give the input corrosponding the Count and store the value in Count
+
+echo " "
+read -p "Enter the Count: " Count
+
+# To check the Count is default or not
+
+if [ "$Count"!=10 ]
+then
+
+# We have check wheter the count is lie between the 0-9. And wildcard -> also matches within  range of 0-9
+
+case "$Count" in
+[0-9])
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+ val=`cut -d "=" -f 2 sig.conf`
+
+# The below command cuts the line with respect to delimitter and fetches the required value and that is stored in variable val
+
+  sed -i 's/'"$val"'/'" $Count "'/g' sig.conf
+
+# To complete variable store the all input user is valid
+ 
+Complete="true"
+;;
+*)
+
+# In this if-else case we check that previous attempt is valid and also check the number of attempt user have try.If user has max attempted for this application then it must be stop with a message. 
+
+if [[ "$Complete" == "false" && "$Attempt" -lt 2 ]]
+then
+# Count number of attemp for particular user
+
+((Attempt++))
+
+# clear command clear the screen
+
+clear
+
+
+echo "Invalid Count and Count is lie between 0-9"
+
+# calling again check_input
+
+check_input
+else
+
+# Message for number of attempt for user has try.
+
+echo "You have twice attempted , Please try again"
+exit 1
+fi
+;;
+esac
+fi
+
+# To show the output after all user input is valid.
+
+if [ "$Complete" == "true" ]
+then
+
+#calling the show_output
+ 
+show_output
+exit 1
+fi
+
+}
+
+function show_output(){
+echo " "
+
+#To view the data or line stored in file 
+
+cat sig.conf
+
+echo " "
+}
+
+check_input
+
