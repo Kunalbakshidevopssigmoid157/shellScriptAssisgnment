@@ -110,6 +110,7 @@ echo "Invalid Component Name"
 
 check_input
 else
+echo "Invalid Component Name"
 
 # Message for number of attempt for user has try.
 
@@ -188,6 +189,7 @@ echo "Invalid Scale"
 
 check_input
 else
+echo "Invalid Scale"
 
 # Message for number of attempt for user has try.
 
@@ -254,6 +256,8 @@ echo "Invalid View"
 
 check_input
 else
+echo "Invalid View"
+
 
 # Message for number of attempt for user has try.
 
@@ -312,7 +316,7 @@ echo "Invalid Count and Count is lie between 0-9"
 
 check_input
 else
-
+echo "Invalid Count and Count is lie between 0-9"
 # Message for number of attempt for user has try.
 
 echo "You have twice attempted , Please try again"
